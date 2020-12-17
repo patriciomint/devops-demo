@@ -1,0 +1,13 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "roman-numeral-translator",
+      "image": "to-be-replaced",
+      "memory": 200,
+      "cpu": 100,
+      "essential": true
+    }
+  ],
+  "family": "roman-numeral-translator",
+  "taskRoleArn": "arn:aws:iam::123456789012:role/AmazonECSTaskS3BucketRole"
+}

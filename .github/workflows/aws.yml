@@ -24,8 +24,9 @@
 #    and best practices on handling the access key credentials.
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - master
 
 name: Deploy to Amazon ECS
 
@@ -68,13 +69,13 @@ jobs:
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: task-definition.json
-        container-name: devops-demo
+        container-name: roman-numeral-translator
         image: ${{ steps.build-image.outputs.image }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: devops-demo
-        cluster: default
+        service: roman-numeral-translator-service
+        cluster: devops-demo-cluster
         wait-for-service-stability: true
