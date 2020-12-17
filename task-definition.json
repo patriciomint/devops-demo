@@ -8,6 +8,11 @@
       "essential": true
     }
   ],
-  "family": "roman-numeral-translator",
-  "taskRoleArn": "arn:aws:iam::123456789012:role/AmazonECSTaskS3BucketRole"
+  "portMappings": [
+    {
+      "containerPort": 3000,
+      "hostPort": 3000
+    }
+  ],
+  "family": "roman-numeral-translator"
 }
