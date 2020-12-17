@@ -6,8 +6,8 @@ const url = require("url");
 // and returns the number as an integer
 // Don't remember roman numerals? Check https://www.mathsisfun.com/roman-numerals.html
 const romanNumeralTranslator = (str) => {
-  // code goes here
-};
+  return 'Test'
+}  // code goes here;
 
 const handleRequest = (req, res) => {
   const { roman } = url.parse(req.url, true).query;
