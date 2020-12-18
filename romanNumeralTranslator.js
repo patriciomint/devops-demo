@@ -12,27 +12,32 @@ const romanNumeralTranslator = (romanString) => {
     M: 1000,
   }
 
-  const decimalResult = romanString.split('').reduce(
-    ({ total, lastDigit }, romanDigit) => {
-      const digit = digits[romanDigit]
+  const decimalResult = String(romanString)
+    .toUpperCase()
+    .split('')
+    .reduce(
+      ({ total, lastDigit }, romanDigit) => {
+        const digit = digits[romanDigit]
 
-      if (!digit) {
-        throw new Error(`${romanDigit} is not a valid roman digit`)
-      }
+        if (!digit) {
+          throw new Error(
+            `Error in ${romanString}: ${romanDigit} is not a valid roman digit`
+          )
+        }
 
-      if (lastDigit && lastDigit < digit) {
-        total -= 2 * lastDigit
-      }
+        if (lastDigit && lastDigit < digit) {
+          total -= 2 * lastDigit
+        }
 
-      total += digit
+        total += digit
 
-      return {
-        lastDigit: digit,
-        total,
-      }
-    },
-    { total: 0 }
-  )
+        return {
+          lastDigit: digit,
+          total,
+        }
+      },
+      { total: 0 }
+    )
 
   return decimalResult.total
 }
