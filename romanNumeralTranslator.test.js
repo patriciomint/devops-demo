@@ -31,5 +31,13 @@ describe('romanNumeralTranslator', () => {
         `"Found digit M preceded by an invalid value (10)"`
       )
     })
+
+    it('should not allow more than one smaller digit', () => {
+      expect(() =>
+        romanNumeralTranslator('IIV')
+      ).toThrowErrorMatchingInlineSnapshot(
+        `"Sequences of two smaller digits followd by a larger one are invalid. Found 2 similar digits followed by V"`
+      )
+    })
   })
 })
