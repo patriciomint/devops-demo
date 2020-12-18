@@ -1,4 +1,22 @@
-# Roman Numerals App -- Take Home Assessment
+# Solution
+
+This repository uses GitHub actions to build a Node 12.3.0 container, and run the tests there.
+
+If this is a merge to 'master' additional actions deploy the build image to ECR and update an ECS task definition
+
+The updated image is deployed to an ECS cluster of 2 running instances behind an ALB
+
+At the time of writing, the project is running at https://devopsdemo.marrone.dev/?roman=xxix
+
+The infrastructure where the project is deployed was defined with an AWS CDK app.
+
+The code for the infrastructure can be found here:
+
+https://github.com/patriciomint/devops-demo-infrastructure
+
+Note: the arn of the tls certificate is passed as a template parameter. The access tokens for the GitHub user were set manually.
+
+# Roman Numerals App
 
 The challenge is to:
 - Create a roman numeral convertor web application.
