@@ -1,5 +1,4 @@
-on:
-  push:
+on: [push]
 
 name: Build / Test / Deploy workflow
 
@@ -43,7 +42,7 @@ jobs:
 
     - name: Push image to Amazon ECR
       id: push-image
-      if: ${{ github.ref == 'master' }}
+      if: github.ref == 'refs/heads/master'
       env:
         IMAGE_NAME: ${{ steps.build-image.outputs.image }}
       run: |
@@ -51,7 +50,7 @@ jobs:
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
-      if: ${{ github.ref == 'master' }}
+      if: github.ref == 'refs/heads/master'
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: task-definition.json
@@ -60,7 +59,7 @@ jobs:
 
     - name: Deploy to Amazon ECS
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-      if: ${{ github.ref == 'master' }}
+      if: github.ref == 'refs/heads/master'
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: roman-numeral-translator-service
