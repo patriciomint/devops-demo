@@ -2,13 +2,18 @@ const romanNumeralTranslator = require('./romanNumeralTranslator.js')
 
 describe('romanNumeralTranslator', () => {
   it('should successfully handle example cases', () => {
+    expect(romanNumeralTranslator('I')).toBe(1)
+    expect(romanNumeralTranslator('II')).toBe(2)
+    expect(romanNumeralTranslator('III')).toBe(3)
+    expect(romanNumeralTranslator('IV')).toBe(4)
+    expect(romanNumeralTranslator('VIII')).toBe(8)
+    expect(romanNumeralTranslator('IX')).toBe(9)
+    expect(romanNumeralTranslator('XIII')).toBe(13)
     expect(romanNumeralTranslator('MCMLIV')).toBe(1954)
     expect(romanNumeralTranslator('MCCLXXVIII')).toBe(1278)
     expect(romanNumeralTranslator('MD')).toBe(1500)
     expect(romanNumeralTranslator('MCD')).toBe(1400)
     expect(romanNumeralTranslator('MDC')).toBe(1600)
-    expect(romanNumeralTranslator('IV')).toBe(4)
-    expect(romanNumeralTranslator('VIII')).toBe(8)
   })
 
   it('should be case insensitive', () => {
@@ -58,6 +63,16 @@ describe('romanNumeralTranslator', () => {
       ).toThrowErrorMatchingInlineSnapshot(
         `"Found sequence of more than 3 equal digits: C"`
       )
+    })
+
+    xit('should not allow substracting and adding the same digit', () => {
+      expect(() => romanNumeralTranslator('CDCC')).toThrow()
+    })
+
+    xit('should disallow invalid repeating values', () => {
+      expect(() => romanNumeralTranslator('VV')).toThrow()
+      expect(() => romanNumeralTranslator('LL')).toThrow()
+      expect(() => romanNumeralTranslator('DD')).toThrow()
     })
   })
 })

@@ -41,10 +41,7 @@ const romanNumeralTranslator = (romanString) => {
     .toUpperCase()
     .split('')
     .reduce(
-      (
-        { total, lastDigit, similarDigitsCount, hadPreviousSmallerDigit },
-        romanDigit
-      ) => {
+      ({ total, lastDigit, similarDigitsCount }, romanDigit) => {
         const digit = digits[romanDigit]
 
         if (!digit) {
@@ -75,7 +72,6 @@ const romanNumeralTranslator = (romanString) => {
 
         return {
           lastDigit: digit,
-          hadPreviousSmallerDigit,
           similarDigitsCount,
           total,
         }
