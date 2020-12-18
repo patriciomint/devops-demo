@@ -8,7 +8,7 @@ const handleRequest = (req, res) => {
   try {
     const { roman } = url.parse(req.url, true).query
 
-    res.write(`Hi there! I'm being served from ${os.hostname()} \n\n`)
+    res.write(`Hello there! I'm being served from ${os.hostname()} \n\n`)
 
     if (typeof roman !== 'string') {
       res.write('You should pass a "roman" query parameter with a roman number')
