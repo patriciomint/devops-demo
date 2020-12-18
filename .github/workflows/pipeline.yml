@@ -43,25 +43,28 @@ jobs:
       run: |
         docker run --rm $IMAGE_NAME test 
 
-    # - name: Push image to Amazon ECR
-    #   id: push-image
-    #   env:
-    #     IMAGE_NAME: ${{ steps.build-image.outputs.image }}
-    #   run: |
-    #     docker push $IMAGE_NAME
+    - name: Push image to Amazon ECR
+      id: push-image
+      if: ${{ github.ref == 'master' }}
+      env:
+        IMAGE_NAME: ${{ steps.build-image.outputs.image }}
+      run: |
+        docker push $IMAGE_NAME
 
-    # - name: Fill in the new image ID in the Amazon ECS task definition
-    #   id: task-def
-    #   uses: aws-actions/amazon-ecs-render-task-definition@v1
-    #   with:
-    #     task-definition: task-definition.json
-    #     container-name: web-server
-    #     image: ${{ steps.build-image.outputs.image }}
+    - name: Fill in the new image ID in the Amazon ECS task definition
+      id: task-def
+      if: ${{ github.ref == 'master' }}
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: task-definition.json
+        container-name: web-server
+        image: ${{ steps.build-image.outputs.image }}
 
-    # - name: Deploy to Amazon ECS
-    #   uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-    #   with:
-    #     task-definition: ${{ steps.task-def.outputs.task-definition }}
-    #     service: roman-numeral-translator-service
-    #     cluster: devops-demo-cluster
-    #     wait-for-service-stability: true
+    - name: Deploy to Amazon ECS
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      if: ${{ github.ref == 'master' }}
+      with:
+        task-definition: ${{ steps.task-def.outputs.task-definition }}
+        service: roman-numeral-translator-service
+        cluster: devops-demo-cluster
+        wait-for-service-stability: true
