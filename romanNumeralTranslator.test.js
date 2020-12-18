@@ -9,4 +9,8 @@ describe('romanNumeralTranslator', () => {
   it('should throw an error when the passed value has some non-roman digits', () => {
     expect(() => romanNumeralTranslator('MCMDLIG')).toThrow()
   })
+
+  it('should be case insensitive', () => {
+    expect(romanNumeralTranslator('MccLxXVIII')).toBe(1278)
+  })
 })
