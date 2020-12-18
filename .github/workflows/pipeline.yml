@@ -1,9 +1,7 @@
 on:
   push:
-    branches:
-      - master
 
-name: Deploy to Amazon ECS
+name: Build / Test / Deploy workflow
 
 jobs:
   buildPipeline:
