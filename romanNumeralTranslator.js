@@ -65,6 +65,12 @@ const romanNumeralTranslator = (romanString) => {
           similarDigitsCount = 1
         }
 
+        if (similarDigitsCount > 3) {
+          throw new Error(
+            `Found sequence of more than 3 equal digits: ${romanDigit}`
+          )
+        }
+
         total += digit
 
         return {

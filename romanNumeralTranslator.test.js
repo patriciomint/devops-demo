@@ -39,5 +39,25 @@ describe('romanNumeralTranslator', () => {
         `"Sequences of two smaller digits followd by a larger one are invalid. Found 2 similar digits followed by V"`
       )
     })
+
+    it('should not allow sequences of more than 3 similar digits', () => {
+      expect(() =>
+        romanNumeralTranslator('MMMM')
+      ).toThrowErrorMatchingInlineSnapshot(
+        `"Found sequence of more than 3 equal digits: M"`
+      )
+
+      expect(() =>
+        romanNumeralTranslator('VIIII')
+      ).toThrowErrorMatchingInlineSnapshot(
+        `"Found sequence of more than 3 equal digits: I"`
+      )
+
+      expect(() =>
+        romanNumeralTranslator('DCCCC')
+      ).toThrowErrorMatchingInlineSnapshot(
+        `"Found sequence of more than 3 equal digits: C"`
+      )
+    })
   })
 })
