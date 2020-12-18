@@ -12,6 +12,7 @@
     "run:local": "docker build --tag roman . && docker run --rm -it --name roman -p 3000:3000 devops"
   },
   "devDependencies": {
-    "jest": "^26.4.2"
+    "jest": "^26.4.2",
+    "prettier": "^2.2.1"
   }
 }
